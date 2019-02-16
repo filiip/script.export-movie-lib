@@ -6,13 +6,30 @@ import lxml.etree as ETREE
 
 
 FILE = home = os.path.expanduser("~") + "/movie_lib.html"
+DB_FILE = r"C:\Users\Filip\AppData\Roaming\Kodi\userdata\Database\MyVideos116.db"
 
 
 def inner_table(elem, params):
     table = ETREE.SubElement(elem, "table", Class="text")
     for param in params:
-        tr = ETREE.SubElement(table, "tr")
+        tr = ETREE.SubElement(table, "tr", style="border-bottom:1pt solid black;")
         ETREE.SubElement(tr, "td").text = param
+
+
+def get_rating(cur, id):
+    cmd_get_info = (u"select rating from rating where rating_id={};".format(id))
+    rate = cur.execute(cmd_get_info).fetchall()[0][0]
+    return str(rate * 10).split(".")[0] + "%"
+
+
+def get_link(data, id):
+    for line in data:
+        # print(type(id), type(line[0]))
+        if line[0] == int(id) and line[-1] == "imdb":
+            break
+    link = "https://www.imdb.com/title/" + line[3]
+    return link
+
 
 def main():
 
@@ -26,17 +43,6 @@ def main():
       tr:nth-child(odd) {{background-color: #fff;}}
       th {{border-bottom:2px solid grey; color: white; background-color: #8F8F8F; padding: 4px;}}
       td {{padding:3px;}}
-      //.zoom {
-      //    background-color: black;
-      //    transition: transform .2s; /* Animation */
-      //    width: 200px;
-      //    height: 300px;
-      //    margin: 0 auto;
-      //  }
-        
-       // .zoom:hover{
-       // transform: scale(1.2);
-       // }
         
         .container {
           position: relative;
@@ -69,7 +75,7 @@ def main():
           height: 451px;
           opacity: 0;
           transition: .5s ease;
-          background-color: #008CBA;
+          background-color: #293f50 ;
         }
         .text {
           color: white;
@@ -81,41 +87,65 @@ def main():
           -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
           text-align: center;
+          border-collapse:collapse;
         }
         """
 
     body = ETREE.SubElement(html, "body")
     dt = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
-    ETREE.SubElement(body, "h1").text = "Movie library KODI exported {dt}".format(dt=dt)
-    table = ETREE.SubElement(body, "table", style="float: left")
+    ETREE.SubElement(body, "p",  style="font-family:Courier New,Courier,monospace;font-size:30px;text-align: center;").text = "Movie library exported {dt}".format(dt=dt)
+    table = ETREE.SubElement(body, "table", style="margin:1em auto;")
 
     db_path = os.path.join("/home/filip/.kodi/userdata/Database/", 'MyVideos107.db')
+    db_path = DB_FILE   #TODO: get the db file dynamically
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
 
-    #c08 = img, c15 = director, c16 = name,
-    cmd_get_info = (u"select movie.c08, movie.c15, movie.c16 from movie;")
+    #c08 = img, c15 = director, c16 = name, c21 = county
+    cmd_get_info = (u"select premiered, c03, c08, c15, c16, c21, c05, c09 from movie;")
     info = cur.execute(cmd_get_info).fetchall()
 
-    line = 4
+
+    cmd_get_info = (u"select * from uniqueid;")
+    data = cur.execute(cmd_get_info).fetchall()
+
+    # data = cur.execute("select * from movie")
+    # for a in data:
+    #     for b in a:
+    #         print(b)
+    #     break
+
+
+    line = 6 #TODO: get dynamically size
     for idx in range(len(info)):
-        img, direct, name = info[idx]
+        date, tag, img, direct, name, country, rate_id, uniq_id = info[idx]
+        year = date.split("-")[0]
+        rate = get_rating(cur, rate_id)
+        link = get_link(data, uniq_id)
+        # print(link)
         if idx % line == 0:
             tr = ETREE.SubElement(table, "tr")
+
         div1 = ETREE.SubElement(tr, "th", Class="container")
 
-        start = img.find("preview=\"") + len("preview=\"") #TODO: use lxml to extract value
-        end = img.find("\">", start)
+        # print(img)
+        imgs = ETREE.fromstring("<fanart>{}</fanart>".format(img))
+        # print(ETREE.tostring(imgs, pretty_print=True))
 
-        ETREE.SubElement(div1, "img", src=img[start:end], title=name, Class="image")
-        div = ETREE.SubElement(div1, "div", Class="overlay")
+        ahref = ETREE.SubElement(div1, "a", href=link)
+        ETREE.SubElement(ahref, "img", src=imgs[-1].text, title=name, Class="image")
+        div = ETREE.SubElement(ahref, "div", Class="overlay")
 
-        inner_table(div, [name, direct])
+        inner_table(div, [name, rate, direct, year, country, tag])
 
 
-    with open(FILE, "w") as fo:
-        fo.write(ETREE.tostring(html, pretty_print=True, encoding="unicode"))
-    print("Exported to {}".format(FILE))
+    with open(FILE, "w", encoding='utf-8') as fo:
+        towrite = ETREE.tostring(html, pretty_print=True, encoding="unicode")
+        fo.write(towrite)
+    # print("Exported to {}".format(FILE))
+    conn.close()
+    return FILE
+
 
 
 if __name__ == "__main__":
