@@ -1,8 +1,10 @@
 import os
+import sys
 import datetime
 
 import sqlite3
-import lxml.etree as ETREE
+import xml.etree.ElementTree as ETREE
+import xml.dom.minidom
 
 
 FILE = home = os.path.expanduser("~") + "/movie_lib.html"
@@ -30,9 +32,25 @@ def get_link(data, id):
     link = "https://www.imdb.com/title/" + line[3]
     return link
 
+def prettify(elem, level=0):
+    i = "\n" + level*"  "
+    j = "\n" + (level-1)*"  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for subelem in elem:
+            prettify(subelem, level + 1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = j
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = j
+    return elem
+
 
 def main():
-
     html = ETREE.Element("html")
     head = ETREE.SubElement(html, "head")
     ETREE.SubElement(head, "title").text = "Kodi Movie Library"
@@ -139,8 +157,11 @@ def main():
         inner_table(div, [name, rate, direct, year, country, tag])
 
 
-    with open(FILE, "w", encoding='utf-8') as fo:
-        towrite = ETREE.tostring(html, pretty_print=True, encoding="unicode")
+    with open(FILE, "w") as fo:
+        if sys.version_info[0] >= 3:
+            towrite = ETREE.tostring(prettify(html), method="xml", encoding="unicode")
+        else:
+            towrite = ETREE.tostring(prettify(html), method="xml", encoding="unicode").encode("utf-8")
         fo.write(towrite)
     # print("Exported to {}".format(FILE))
     conn.close()
