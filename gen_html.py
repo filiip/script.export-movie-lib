@@ -1,10 +1,10 @@
 import os
+import io
 import sys
 import datetime
 
 import sqlite3
 import xml.etree.ElementTree as ETREE
-import xml.dom.minidom
 
 
 FILE = home = os.path.expanduser("~") + "/movie_lib.html"
@@ -157,11 +157,8 @@ def main():
         inner_table(div, [name, rate, direct, year, country, tag])
 
 
-    with open(FILE, "w") as fo:
-        if sys.version_info[0] >= 3:
-            towrite = ETREE.tostring(prettify(html), method="xml", encoding="unicode")
-        else:
-            towrite = ETREE.tostring(prettify(html), method="xml", encoding="unicode").encode("utf-8")
+    with io.open(FILE, mode="w", encoding='utf-8') as fo:
+        towrite = ETREE.tostring(prettify(html), method="xml", encoding="utf-8").decode("utf-8")
         fo.write(towrite)
     # print("Exported to {}".format(FILE))
     conn.close()
