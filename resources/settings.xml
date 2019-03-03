@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <setting id="path" type="folder" default="" label="Path to video library directory" source="movies"/>
-    <setting id="recursive" type="bool" default="false" label="Search recursively"/>
-    <setting id="watched" type="labelenum" label="Status to set" values="watched|unwatched"/>
+    <category label="configs">
+        <setting id="path" type="folder" default="~/" source="" label="Folder for exported file"/>
+    </category>
 </settings>

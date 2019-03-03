@@ -11,15 +11,18 @@ __settings__ = xbmcaddon.Addon(id='script.export-movie-lib')
 addon_name = __settings__.getAddonInfo("name")
 __language__ = __settings__.getLocalizedString
 __language__(30204)
-# settings = __settings__.openSettings()
-#
-# path = __settings__.getSetting("path")
+settings = __settings__.openSettings()
+
+path = __settings__.getSetting("path")
+if path == "~/":    # TODO: find a cross platform solution for default path
+    path = os.path.expanduser("~")
+path = os.path.join(path, "movie_lib.html")
 # recursive = __settings__.getSetting("recursive")
 # watched = __settings__.getSetting("watched")
 
 
 
-file = gen_html.main()
+file = gen_html.gen_html(path)
 
 if file:
     xbmcgui.Dialog().ok(addon_name, "Movies library exported to " + file)
