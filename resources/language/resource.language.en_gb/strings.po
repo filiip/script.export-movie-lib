@@ -1,0 +1,254 @@
+# Kodi language file
+# Addon Name: Export Movie Library
+# Addon id: script.export-movie-lib
+# Addon Provider: filiip
+msgid ""
+msgstr ""
+
+"Project-Id-Version: XBMC-Addons\n"
+"Report-Msgid-Bugs-To: filiip@seznam.cz\n"
+"POT-Creation-Date: 2019-11-04\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+###########################################
+# Settings
+msgctxt "#32000"
+msgid "Export configuration"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Folder for exported path"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Sort by"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Sort order"
+msgstr ""
+
+msgctxt "#32004"
+msgid "title"
+msgstr ""
+
+msgctxt "#32005"
+msgid "year"
+msgstr ""
+
+msgctxt "#32006"
+msgid "director"
+msgstr ""
+
+msgctxt "#32007"
+msgid "rating"
+msgstr ""
+
+msgctxt "#32008"
+msgid "ascending"
+msgstr ""
+
+msgctxt "#32009"
+msgid "descending"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Movies per line"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Limit export"
+msgstr ""
+
+msgctxt "#32012"
+msgid "From year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Genre filter"
+msgstr ""
+
+msgctxt "#32015"
+msgid "With actor"
+msgstr ""
+
+msgctxt "#32016"
+msgid "From director"
+msgstr ""
+
+msgctxt "#32017"
+msgid "Country"
+msgstr ""
+
+msgctxt "#32018"
+msgid "With tag"
+msgstr ""
+
+msgctxt "#32019"
+msgid "any"
+msgstr ""
+
+#### Genders
+msgctxt "#32020"
+msgid "Comedy"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Drama"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Romance"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Adventure"
+msgstr ""
+
+msgctxt "#32024"
+msgid "Science Fiction"
+msgstr ""
+
+msgctxt "#32025"
+msgid "Animation"
+msgstr ""
+
+msgctxt "#32026"
+msgid "Fantasy"
+msgstr ""
+
+msgctxt "#32027"
+msgid "Action"
+msgstr ""
+
+msgctxt "#32028"
+msgid "Crime"
+msgstr ""
+
+msgctxt "#32029"
+msgid "Thriller"
+msgstr ""
+
+msgctxt "#32030"
+msgid "Mystery"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Horror"
+msgstr ""
+
+msgctxt "#32032"
+msgid "Music"
+msgstr ""
+
+msgctxt "#32033"
+msgid "War"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+msgctxt "#32013"
+msgid "To year"
+msgstr ""
+
+
+
+
+###########################################
+# Errors
+msgctxt "#32900"
+msgid "Error ocuured during data loading from database:"
+msgstr ""

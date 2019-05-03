@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <category label="configs">
-        <setting id="path" type="folder" default="~/" source="" label="Folder for exported file"/>
+    <category label="32000">
+        <setting id="path" type="folder" default="$HOME" source="" label="32001"/>
+        <setting id="sort_by" type="enum" ldefault="32004" label="32002" lvalues="32004|32005|32007"/>
+        <setting id="sort_ord" type="enum" ldefault="32009" label="32001" lvalues="32008|32009"/>
+        <setting id="width" type="number" default="6" label="32010"/>
+        <setting id="limits" type="bool" default="False" label="32011"/>
+        <setting id="lim_year_from" visible="eq(-1,True)" type="slider" default="1900" label="32012" range="1900,2050" option="int"/>
+        <setting id="lim_year_to" visible="eq(-2,True)" type="slider" default="2050" label="32013" range="1900,2050" option="int"/>
+
+        <setting id="genre_lim" visible="eq(-3,True)" type="bool" default="False" label="32014"/>
+        <setting id="genre_lim_comedy" visible="eq(-1,True)" type="bool" default="False" label="32020"/>
+        <setting id="genre_lim_drama" visible="eq(-2,True)" type="bool" default="False" label="32021"/>
+        <setting id="genre_lim_romance" visible="eq(-3,True)" type="bool" default="False" label="32022"/>
+        <setting id="genre_lim_adventure" visible="eq(-4,True)" type="bool" default="False" label="32023"/>
+        <setting id="genre_lim_scifi" visible="eq(-5,True)" type="bool" default="False" label="32024"/>
+        <setting id="genre_lim_animation" visible="eq(-6,True)" type="bool" default="False" label="32025"/>
+        <setting id="genre_lim_fantasy" visible="eq(-7,True)" type="bool" default="False" label="32026"/>
+        <setting id="genre_lim_action" visible="eq(-8,True)" type="bool" default="False" label="32027"/>
+        <setting id="genre_lim_crime" visible="eq(-9,True)" type="bool" default="False" label="32028"/>
+        <setting id="genre_lim_thriller" visible="eq(-10,True)" type="bool" default="False" label="32029"/>
+        <setting id="genre_lim_mystery" visible="eq(-11,True)" type="bool" default="False" label="32030"/>
+        <setting id="genre_lim_horror" visible="eq(-12,True)" type="bool" default="False" label="32031"/>
+        <setting id="genre_lim_music" visible="eq(-13,True)" type="bool" default="False" label="32032"/>
+        <setting id="genre_lim_war" visible="eq(-14,True)" type="bool" default="False" label="32033"/>
+
+        <setting id="lim_actor" visible="eq(-18,True)" type="text" default="any" label="32015"/>
+        <setting id="lim_director" visible="eq(-19,True)" type="text" default="any" label="32016"/>
+        <setting id="lim_country" visible="eq(-20,True)" type="text" default="any" label="32017"/>
+        <setting id="lim_tag" visible="eq(-21,True)" type="text" default="any" label="32018"/>
     </category>
 </settings>
