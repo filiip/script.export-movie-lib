@@ -44,7 +44,6 @@ def main():
     sort_ord = SORT_ORD[addon.getSetting(u"sort_ord")]
     width = addon.getSetting(u"width")
 
-    # xbmcgui.Dialog().ok("Eval", addon.getSetting(u"limits"), str(eval(addon.getSetting(u"limits")), type(addon.getSetting(u"limits"))))
     lims = {}
     gen_lims = []
     if to_bool(addon.getSetting(u"limits")):

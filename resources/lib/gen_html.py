@@ -140,7 +140,6 @@ class HtmlPage(object):
         :return: path of created HTMML page
         :rtype: str
         """
-        xbmcgui.Dialog().ok("Filters", str(self.filter))
         html = Etree.Element("html")
         head = Etree.SubElement(html, "head")
         Etree.SubElement(head, "title").text = "Kodi Movie Library"
