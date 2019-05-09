@@ -36,7 +36,7 @@ class HtmlPage(object):
         :type  path: str
         """
         self.path = path
-        self.filter = {"and": []}
+        self.filter = {u"and": []}
 
     @staticmethod
     def _inner_table(parent, params):
@@ -108,13 +108,13 @@ class HtmlPage(object):
         """
         for opt, val in filters.items():
             if opt == u"year_from":
-                item = {"operator": "greaterthan", "field": "year", "value": str(val-1)}
+                item = {u"operator": u"greaterthan", u"field": u"year", u"value": u"{}".format(val-1)}
             elif opt == u"year_to":
-                item = {"operator": "lessthan", "field": "year", "value": str(val+1)}
+                item = {u"operator": u"lessthan", u"field": u"year", u"value": u"{}".format(val+1)}
             else:
-                item = {"operator": "contains", "field": opt.strip("lim_"), "value": val}
+                item = {u"operator": u"contains", u"field": opt.strip("lim_"), u"value": u"{}".format(val)}
 
-            self.filter["and"].append(item)
+            self.filter[u"and"].append(item)
 
     def set_genre_filters(self, filters):
         """Set filters for genres
@@ -122,11 +122,11 @@ class HtmlPage(object):
         :param filters: list of allowed genres
         :type filters: list
         """
-        item = {"operator": "startswith", "field": "genre", "value": []}
+        item = {u"operator": u"startswith", u"field": u"genre", u"value": []}
         for genre in filters:
             gen = genre.replace("genre_lim_", "")[:3]
-            item["value"].append(gen)
-        self.filter["and"].append(item)
+            item[u"value"].append(gen)
+        self.filter[u"and"].append(item)
 
     def gen_html(self, sort_by, sort_ord, width):
         """Generate HTML page with exported movie database
@@ -149,12 +149,12 @@ class HtmlPage(object):
         Etree.SubElement(body, "p").text = "Movie library exported {dt}".format(dt=dt)
         table = Etree.SubElement(body, "table", style="margin:1em auto;")
 
-        query = {"jsonrpc": "2.0",
-                 "params": {"sort": {"order": sort_ord, "method": sort_by},
-                            "filter": self.filter,
-                            "properties": [RATE, DIRECT, TITLE, YEAR, TAG, COUNTRY, ART, IMDBID]},
-                 "method": "VideoLibrary.GetMovies",
-                 "id": "libMovies"}
+        query = {u"jsonrpc": u"2.0",
+                 u"params": {u"sort": {u"order": sort_ord, u"method": sort_by},
+                             u"filter": self.filter,
+                             u"properties": [RATE, DIRECT, TITLE, YEAR, TAG, COUNTRY, ART, IMDBID]},
+                 u"method": u"VideoLibrary.GetMovies",
+                 u"id": u"libMovies"}
 
         res = xbmc.executeJSONRPC(json.dumps(query))
         res = json.loads(res)

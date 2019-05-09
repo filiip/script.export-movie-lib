@@ -24,14 +24,14 @@ def to_bool(val):
     :return: converted value
     :rtype: bool
     """
-    if val.lower() == "true":
+    if val.lower() == u"true":
         return True
     return False
 
 
 def main():
     addon = xbmcaddon.Addon()
-    addon_name = addon.getAddonInfo("name")
+    addon_name = addon.getAddonInfo(u"name")
 
     addon.openSettings()
 
@@ -47,18 +47,18 @@ def main():
     lims = {}
     gen_lims = []
     if to_bool(addon.getSetting(u"limits")):
-        lim_opts = ["year_from", "year_to", "actor", "director", "country", "tag"]
+        lim_opts = [u"year_from", u"year_to", u"actor", u"director", u"country", u"tag"]
         for opt in lim_opts:
             val = addon.getSetting(u"lim_{}".format(opt))
-            if opt in ["year_from", "year_to"]:
+            if opt in [u"year_from", u"year_to"]:
                 val = int(val)
             elif val == u"any":
                 continue
             lims[opt] = val
 
         if to_bool(addon.getSetting(u"genre_lim")):
-            genres = ["comedy", "drama", "romance", "adventure", "scifi", "animation", "fantasy",
-                      "action", "crime", "thriller", "mystery", "horror", "music", "war"]
+            genres = [u"comedy", u"drama", u"romance", u"adventure", u"scifi", u"animation", u"fantasy",
+                      u"action", u"crime", u"thriller", u"mystery", u"horror", u"music", u"war"]
             for genre in genres:
                 val = to_bool(addon.getSetting(u"genre_lim_{}".format(genre)))
                 if val:
@@ -81,7 +81,7 @@ def main():
     file = page.gen_html(sort_by, sort_ord, int(width))
 
     if file:
-        xbmcgui.Dialog().ok(addon_name, u"Movies library exported to " + file)
+        xbmcgui.Dialog().ok(addon_name, "Movies library exported to " + file)
 
 
 if __name__ == '__main__':
